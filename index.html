@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosecha Inteligente - Proyecto Airam, Brisa, Joshuan y Pedro</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --accent: #10b981;
+            --accent-dark: #047857;
+            --bg-light: #f4f6f9;
+            --text-dark: #1f2937;
+            --text-muted: #4b5563;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #0d9488);
+            color: white;
+            padding: 45px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .intro-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--primary-light);
+        }
+
+        .intro-box h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 8px;
+        }
+
+        .card ul {
+            list-style-type: none;
+        }
+
+        .card li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .card li::before {
+            content: "💧";
+            position: absolute;
+            left: 0;
+        }
+
+        .simulator-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            margin-top: 40px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .simulator-section h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .sim-grid {
+                grid-template-columns: 1fr 1.2fr;
+            }
+        }
+
+        .controls {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .control-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .btn-sim {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .results {
+            background: #f0fdf4;
+            border: 2px dashed #bbf7d0;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .metric-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metric span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .metric strong {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .ai-feedback {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        footer {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Siembra Inteligente: Agua y Vida en el Campo</h1>
+        <p>Tecnología aplicada para la optimización del recurso hídrico en nuestra comunidad agrícola.</p>
+        <span class="badge">🤖 Proyecto de Innovación con IA - 3er Año de Bachillerato</span>
+    </header>
+
+    <main>
+        <section class="intro-box">
+            <h2>Nuestra Misión</h2>
+            <p>Hola, mi nombre es <strong>Airam</strong>, y junto con mis compañeros <strong>Brisa, Joshuan y Pedro</strong>, hemos generado esta pequeña página web implementando la Inteligencia Artificial para solucionar una problemática real de nuestra comunidad: el uso ineficiente del agua en el campo. Todo esto como parte de un proyecto integrador que llevamos a cabo en nuestro <strong>3er año de bachillerato</strong>, buscando demostrar que la tecnología puede ser el mejor aliado del conocimiento agrícola tradicional.</p>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <h3>Buenas Prácticas para el Riego</h3>
+                <ul>
+                    <li><strong>Riego por goteo localizado:</strong> Lleva el agua directamente a las raíces, reduciendo pérdidas drásticamente.</li>
+                    <li><strong>Horarios estratégicos:</strong> Regar durante el amanecer o atardecer evita que el sol evapore el agua.</li>
+                    <li><strong>Acolchado o cobertura:</strong> Colocar restos vegetales retiene la humedad por mucho más tiempo.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Ventajas de la Gestión Inteligente</h3>
+                <ul>
+                    <li><strong>Ahorro del 50% de agua:</strong> Preserva los pozos y mantos acuíferos de nuestra comunidad.</li>
+                    <li><strong>Cosechas de mayor calidad:</strong> Evita que las plantas sufran estrés hídrico o pudrición.</li>
+                    <li><strong>Reducción de costos:</strong> Menos horas de bombeo significan menor gasto de electricidad y combustible.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SIMULADOR COMPLETO -->
+        <section class="simulator-section">
+            <h2>Simulador de Riego Inteligente Basado en IA</h2>
+            <div class="sim-grid">
+                <div class="controls">
+                    <div class="control-group">
+                        <label>1. Selecciona tu cultivo:</label>
+                        <select id="cultivo">
+                            <option value="maiz">Maíz (Consumo medio)</option>
+                            <option value="frijol">Frijol (Consumo bajo)</option>
+                            <option value="hortalizas">Hortalizas (Consumo alto)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>2. Tipo de tierra (Suelo):</label>
+                        <select id="suelo">
+                            <option value="arcilloso">Arcilloso (Retiene mucha agua)</option>
+                            <option value="arenoso">Arenoso (Se seca rápido)</option>
+                            <option value="franco">Franco (Tierra negra/Equilibrado)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>3. Clima de hoy:</label>
+                        <select id="clima">
+                            <option value="caluroso">Muy Soleado y Caluroso</option>
+                            <option value="nublado">Nublado o Templado</option>
+                            <option value="lluvioso">Lluvioso</option>
+                        </select>
+                    </div>
+                    <button class="btn-sim" onclick="calcular()">Analizar con IA Escolar</button>
+                </div>
+
+                <div class="results" id="output-box">
+                    <h4 style="text-align: center; color: #166534; margin-bottom: 15px;">Diagnóstico de la IA</h4>
+                    <div class="metric-box">
+                        <div class="metric">
+                            <span>Volumen de Riego</span>
+                            <strong id="volumen">- - -</strong>
+                        </div>
+                        <div class="metric">
+                            <span>Momento Ideal</span>
+                            <strong id="momento">- - -</strong>
+                        </div>
+                    </div>
+                    <div class="ai-feedback">
+                        <h5 style="color: var(--accent-dark); font-size: 0.9rem; margin-bottom: 5px;">🤖 Sugerencia del Algoritmo:</h5>
+                        <p id="diagnostico" style="font-size: 0.9rem;">Ingresa los datos para recibir la recomendación del equipo de 3er año.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Proyecto Escolar: "Cuidado de la Tierra mediante Tecnologías Limpias"</strong></p>
+        <p>Equipo: Airam, Brisa, Joshuan y Pedro | 3er Año de Bachillerato</p>
+        <p>Generando soluciones reales para el campo rural.</p>
+    </footer>
+
+    <script>
+        function calcular() {
+            const cultivo = document.getElementById('cultivo').value;
+            const suelo = document.getElementById('suelo').value;
+            const clima = document.getElementById('clima').value;
+
+            let vol = ""; let mom = ""; let diag = "";
+
+            if (clima === 'lluvioso') {
+                vol = "0% (¡Pausar!)"; mom = "No regar";
+                diag = "Nuestros sensores virtuales detectan lluvia. La IA sugiere guardar el agua para los días secos.";
+            } else {
+                if (suelo === 'arenoso') {
+                    vol = "100% (Alto)"; mom = "6:00 AM";
+                    diag = "El suelo arenoso drena muy rápido. Riego profundo muy temprano para evitar la evaporación solar.";
+                } else if (suelo === 'arcilloso') {
+                    vol = "50% (Moderado)"; mom = "7:00 PM";
+                    diag = "Suelo con alta retención. Evita encharcamientos; el riego al atardecer es ideal para este tipo de tierra.";
+                } else {
+                    vol = "80% (Óptimo)"; mom = "Mañana o Tarde";
+                    diag = "Tu suelo es equilibrado. Un riego moderado en las horas frescas mantendrá la salud del cultivo.";
+                }
+            }
+
+            document.getElementById('volumen').innerText = vol;
+            document.getElementById('momento').innerText = mom;
+            document.getElementById('diagnostico').innerText = diag;
+        }
+    </script>
+</body>
+</html>
